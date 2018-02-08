@@ -2,7 +2,7 @@
 set -e
 
 function zap_device {
-  local device_match_string='/dev/([hsv]d[a-z]{1,2}|cciss/c[0-9]d[0-9]p|nvme[0-9]n[0-9]p){1,2}'
+  local device_match_string='/dev/([x]?[hsv]d[a-z]{1,2}|cciss/c[0-9]d[0-9]p|nvme[0-9]n[0-9]p){1,2}'
 
   if [[ -z ${OSD_DEVICE} ]]; then
     log "Please provide device(s) to zap!"
@@ -11,8 +11,8 @@ function zap_device {
   fi
 
   if [[ "${OSD_DEVICE}" == "all_ceph_disks" ]]; then
-    for type in data journal block wal db; do
-      for disk in $(blkid -t PARTLABEL="ceph $type" -o device | uniq); do
+    for type in " data" " journal" " block" " block.wal" " block.db"; do
+      for disk in $(blkid -t PARTLABEL="ceph$type" -o device | uniq); do
         dev="$dev ${disk%?}"
       done
     done

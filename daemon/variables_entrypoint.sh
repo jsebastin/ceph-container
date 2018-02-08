@@ -17,7 +17,7 @@ ALL_SCENARIOS="populate_kvstore mon osd osd_directory osd_directory_single osd_c
 : "${CEPH_CLUSTER_NETWORK:=${CEPH_PUBLIC_NETWORK}}"
 : "${CEPH_DAEMON:=${1}}" # default daemon to first argument
 : "${CEPH_GET_ADMIN_KEY:=0}"
-: "${HOSTNAME:=$(hostname -s)}"
+: "${HOSTNAME:=$(uname -n)}"
 : "${MON_NAME:=${HOSTNAME}}"
 : "${MON_DATA_DIR:=/var/lib/ceph/mon/${CLUSTER}-${MON_NAME}}"
 : "${K8S_HOST_NETWORK:=0}"
@@ -62,9 +62,7 @@ ALL_SCENARIOS="populate_kvstore mon osd osd_directory osd_directory_single osd_c
 : "${GANESHA_OPTIONS:=""}"
 : "${GANESHA_EPOCH:=""}" # For restarting
 : "${MGR_NAME:=${HOSTNAME}}"
-: "${MGR_DASHBOARD:=1}"
 : "${MGR_IP:=0.0.0.0}"
-: "${MGR_PORT:=7000}"
 
 # Make sure to change the value of one another if user changes some of the default values
 while read -r line; do

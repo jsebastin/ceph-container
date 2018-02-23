@@ -1,4 +1,4 @@
-# CEPH DAEMON IMAGE
+# CEPH DAEMON IMAGE for ceph-ansible CI handlers tests only
 # CEPH VERSION: Luminous
 # CEPH VERSION DETAIL: 12.x.x
 

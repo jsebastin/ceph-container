@@ -29,6 +29,8 @@ FLAVORS_TO_BUILD ?= \
 
 REGISTRY ?= ceph
 
+RELEASE ?= "undefined"
+CREATION_TIME=$(shell date +%Y%m%d_%H%M%S)
 
 # ==============================================================================
 # Internal definitions
@@ -56,6 +58,7 @@ stage.%:
 	$(call set_env_var,BASEOS_TAG,$*) $(call set_env_var,IMAGES_TO_BUILD,$*) \
 	$(call set_env_var,STAGING_DIR,$*) $(call set_env_var,BASE_IMAGE,$*) \
 	$(call set_env_var,DAEMON_BASE_IMAGE,$*) $(call set_env_var,DAEMON_IMAGE,$*) \
+	$(call set_env_var,CREATION_TIME,$*) $(call set_env_var,RELEASE,$*) $(call set_env_var,GIT_BRANCH,$*) \
 	sh -c maint-lib/stage.py
 
 daemon-base.%: stage.%
